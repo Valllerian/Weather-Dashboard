@@ -97,7 +97,7 @@ function forecast(e)  {
        })   
        .then(function (data) {
         console.log(futureUrl)
-    $("#forecast").each(function (i) {
+    $(".forecast").each(function (i) {
       var temp = data.list[i].main.temp;
       var imgLink =
         "https://openweathermap.org/img/w/" +
