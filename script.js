@@ -48,9 +48,8 @@ function getWeather(e) {
         $('#humidity').text(data.main.humidity + "%")
         $('#uvIndex').text(data.main.uvi);
         getUVI(e)
-        forecast(data);}
-        
-    )}};
+        forecast(e);
+    })}};
   
 
 function  getUVI(e) {
@@ -74,22 +73,43 @@ function  getUVI(e) {
           }
 })};
 
+var dayOne =  moment().add(1, 'days').format('ll');
+var dayTwo =  moment().add(2, 'days').format('ll');
+var dayThree =  moment().add(3, 'days').format('ll');
+var dayFour =  moment().add(4, 'days').format('ll');
+var dayFive =  moment().add(5, 'days').format('ll');
 
-var forecast = function (arr) {
+$('#dayOne').text(dayTwo);
+$('#dateTwo').text(dayTwo);
+$('#dayThree').text(dayThree);
+$('#dayFour').text(dayFour);
+$('#dayFive').text(dayFive);
+
+
+// console.log(dayFive);
+
+// 
+function forecast(e)  {
+    futureUrl = forecastUrl + searchedCity + apiKey + unitMeasurement;
+       fetch(futureUrl)
+       .then(function (response) {
+       return response.json();
+       })   
+       .then(function (data) {
+        console.log(futureUrl)
     $("#forecast").each(function (i) {
-      var temp = arr.daily[i].temp.day;
+      var temp = data.list[i].main.temp;
       var imgLink =
         "https://openweathermap.org/img/w/" +
-        arr.daily[i].weather[0].icon +
+        data.list[i].weather[0].icon +
         ".png";
-      var wind = arr.daily[i].wind_speed;
-      var humid = arr.daily[i].humidity;
+      var wind = data.list[i].wind.speed;
+      var humid = data.list[i].main.humidity;
       this.querySelector(".icon").setAttribute("src", imgLink);
-      this.querySelector(".temp").textContent = "Temp:" + temp + "F";
-      this.querySelector(".wind").textContent = "Wind" + wind + "MPH";
-      this.querySelector(".humid").textContent = "Humidity:" + humid + "%";
+      this.querySelector(".temp").textContent = "Temp: " + temp + "F";
+      this.querySelector(".wind").textContent = "Wind " + wind + "MPH";
+      this.querySelector(".humid").textContent = "Humidity: " + humid + "%";
     });
-  };
-
+  })};
 
 $('#search-button').click (submitSearch);
