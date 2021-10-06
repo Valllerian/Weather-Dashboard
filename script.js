@@ -146,7 +146,7 @@ $(document).ready ( function(){
 
 // $('.btnPast').on(click , '.btnPast')
 $(document).on('click','.btnPast',function(e){
-    searchedCity = $(this).data('city').toString();
+    searchedCity = $(this).data('city');
     console.log(searchedCity);
     getWeather(e);
 })
