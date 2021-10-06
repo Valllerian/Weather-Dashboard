@@ -14,7 +14,6 @@ var unitMeasurement = "&units=imperial";
 var lat;
 var lon;
 
-
 // Setting up a curent date (format ll // Oct 5, 2021):
 var currentDate = moment().format('ll');
 var dayOne =  moment().add(1, 'days').format('ll');
@@ -29,14 +28,11 @@ $('#dayThree').text(dayThree);
 $('#dayFour').text(dayFour);
 $('#dayFive').text(dayFive);
 
-
 function submitSearch(e){
     searchedCity = userCity.val(); 
-
     var searchedCities = JSON.parse(localStorage.getItem("savedCities") || "[]");
     searchedCities.push(searchedCity);
     localStorage.setItem("savedCities", JSON.stringify(searchedCities));
-
     var lastCity = document.createElement("button");
     lastCity.innerText = searchedCity;
     lastCity.classList.add("btn");
@@ -49,7 +45,6 @@ function submitSearch(e){
 
 }
 
-
 function getWeather(e) {
 
     if (searchedCity === ""){
@@ -61,8 +56,6 @@ function getWeather(e) {
       $('#uvIndex').text("");
     }
         else {
-            
-        
        finalUrl = starterUrl + searchedCity + apiKey + unitMeasurement;
        fetch(finalUrl)
        .then(function (response) {
@@ -71,7 +64,9 @@ function getWeather(e) {
        .then(function (data) {
         lat = data.coord.lat;
         lon = data.coord.lon;
+        console.log(data)
         $('#userInput').children('input').val('')
+        $('#conditions').attr("src", "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
         $('#location').text(searchedCity);
         $('#cityDate').text(currentDate);
         $('#temp').text(data.main.temp + '°F');
@@ -82,7 +77,6 @@ function getWeather(e) {
         forecast(e);
     })}};
   
-
 function  getUVI(e) {
         var uviIndexURL = "https://api.openweathermap.org/data/2.5/uvi/forecast?lat=" + lat + "&lon=" + lon + apiKey;
         fetch(uviIndexURL)
@@ -104,12 +98,8 @@ function  getUVI(e) {
           }
 })};
 
-
-
-
 // console.log(dayFive);
 
-// 
 function forecast(e)  {
     futureUrl = forecastUrl + searchedCity + apiKey + unitMeasurement;
        fetch(futureUrl)
@@ -117,13 +107,10 @@ function forecast(e)  {
        return response.json();
        })   
        .then(function (data) {
-        console.log(futureUrl)
+        // console.log(futureUrl)
     $(".forecast").each(function (i) {
       var temp = data.list[i].main.temp;
-      var imgLink =
-        "https://openweathermap.org/img/w/" +
-        data.list[i].weather[0].icon +
-        ".png";
+      var imgLink = "https://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png";
       var wind = data.list[i].wind.speed;
       var humid = data.list[i].main.humidity;
       this.querySelector(".icon").setAttribute("src", imgLink);
@@ -133,12 +120,9 @@ function forecast(e)  {
     });
   })};
 
-
-
-
 $(document).ready ( function(){
     var searchedCities = JSON.parse(localStorage.getItem("savedCities") || "[]");
-    console.log(searchedCities);
+    // console.log(searchedCities);
     for (let i = 0; i < searchedCities.length; i++) {
         $('#pastSearches').append('<button class ="btn btnPast" data-city = "'+ searchedCities[i]+'">'+ searchedCities[i] + '</button>');
     }
