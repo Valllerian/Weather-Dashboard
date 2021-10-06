@@ -24,7 +24,7 @@
 <!-- input\search from mdbootstrap -->
 <div class="float-start">
     <h1>Search for a City:</h1>
-  <div class="form-outline">
+  <div class="form-outline" id = "userInput">
     <input id="search-input" type="search" id="form1" class="form-control" />
     <label class="form-label" for="form1">Input your destination</label>
   </div>
@@ -35,16 +35,18 @@
 </div>
 
 <!-- Main sextion with weather -->
+
 <section  class="container col-9 border">
     <div class="jumbotron">
       <div class = "row">
         <!-- City name -->
-      <h1 class="display-4 col">Location</h1>
+      <h1  class="display-6 col">Location: <span id = "location"></span>
+      </h1>
     </div>
       <div class = "row justify-content-between">
         <!-- will generate the date here -->
         <p id = "date" class="lead col-3" >
-          Date
+          Date: <span id = "cityDate"></span>
         </p>
         <p id="weathDesc" class="col-2 float-right">
         </p>
@@ -52,10 +54,10 @@
       <hr class="my-4" />
       <div class="row">
         <!-- Main weather parameters for the input City  -->
-      <p id = "temp" class="col-3">Temperature</p>
-      <p id = "wind" class="col-3">Wind Speed</p>
-      <p id = "humidity" class="col-3">Humidity</p>
-      <p id = "uvIndex" class="col-3"> UV Index</p>
+      <p  class="col-3">Temperature: <span id = "temp"></span></p>
+      <p  class="col-3">Wind Speed: <span id = "wind"></span></p>
+      <p  class="col-3">Humidity: <span id = "humidity"></span></p>
+      <p  class="col-3"> UV Index: <span id = "uvIndex"></span></p>
     </div>
     </div>
   <div class="container row d-flex justify-content-between">
@@ -63,30 +65,35 @@
       <p>5-Day forecast:</p>
     <div class="fiveday card col-2">
       <img class="day-icon" src="" alt="">
+        <p class="date"></p>
         <p class="temp"></p>
         <p class="wind"></p>
         <p class="humid"></p>
     </div>
     <div class="fiveday card col-2">
       <img class="day-icon" src="" alt="">
+        <p class="date"></p>
         <p class="temp"></p>
         <p class="wind"></p>
         <p class="humid"></p>
     </div>
     <div class="fiveday card col-2">
       <img class="day-icon" src="" alt="">
+        <p class="date"></p>
         <p class="temp"></p>
         <p class="wind"></p>
         <p class="humid"></p>
     </div>
     <div class="fiveday card col-2">
       <img class="day-icon" src="" alt="">
+        <p class="date"></p>
         <p class="temp"></p>
         <p class="wind"></p>
         <p class="humid"></p>
     </div>
     <div class="fiveday card col-2">
       <img class="day-icon" src="" alt="">
+        <p class="date"></p>
         <p class="temp"></p>
         <p class="wind"></p>
         <p class="humid"></p>
