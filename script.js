@@ -132,20 +132,20 @@ function forecast(e)  {
   })};
 
 
-function pastClick (e){
-    searchedCity = $(this).data('city')
-    getWeather(e);
-}
 
 
 $(document).ready ( function(){
     var searchedCities = JSON.parse(localStorage.getItem("savedCities") || "[]");
 
     for (let i = 0; i < searchedCities.length; i++) {
-        $('#pastSearches').append('<button class ="btn btnPast" data-city = "' + searchedCities[i] + '">'+ searchedCities[i] + '</button>');
+        $('#pastSearches').append('<button class ="btn btnPast" data-city "' + searchedCities[i] + '">'+ searchedCities[i] + '</button>');
     }
  })
 
-$('.btnPast').click ("[data-city]", pastClick)
+// $('.btnPast').on(click , '.btnPast')
+$(document).on('click','.btnPast',function(e){
+    searchedCity = $(this).data('city');
+    getWeather(e);
+})
 
 $('#search-button').click (submitSearch);
