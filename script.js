@@ -17,6 +17,18 @@ var lon;
 
 // Setting up a curent date (format ll // Oct 5, 2021):
 var currentDate = moment().format('ll');
+var dayOne =  moment().add(1, 'days').format('ll');
+var dayTwo =  moment().add(2, 'days').format('ll');
+var dayThree =  moment().add(3, 'days').format('ll');
+var dayFour =  moment().add(4, 'days').format('ll');
+var dayFive =  moment().add(5, 'days').format('ll');
+
+$('#dayOne').text(dayTwo);
+$('#dateTwo').text(dayTwo);
+$('#dayThree').text(dayThree);
+$('#dayFour').text(dayFour);
+$('#dayFive').text(dayFive);
+
 
 function submitSearch(e){
     searchedCity = userCity.val(); 
@@ -92,17 +104,7 @@ function  getUVI(e) {
           }
 })};
 
-var dayOne =  moment().add(1, 'days').format('ll');
-var dayTwo =  moment().add(2, 'days').format('ll');
-var dayThree =  moment().add(3, 'days').format('ll');
-var dayFour =  moment().add(4, 'days').format('ll');
-var dayFive =  moment().add(5, 'days').format('ll');
 
-$('#dayOne').text(dayTwo);
-$('#dateTwo').text(dayTwo);
-$('#dayThree').text(dayThree);
-$('#dayFour').text(dayFour);
-$('#dayFive').text(dayFive);
 
 
 // console.log(dayFive);
@@ -136,15 +138,16 @@ function forecast(e)  {
 
 $(document).ready ( function(){
     var searchedCities = JSON.parse(localStorage.getItem("savedCities") || "[]");
-
+    console.log(searchedCities);
     for (let i = 0; i < searchedCities.length; i++) {
-        $('#pastSearches').append('<button class ="btn btnPast" data-city "' + searchedCities[i] + '">'+ searchedCities[i] + '</button>');
+        $('#pastSearches').append('<button class ="btn btnPast" data-city = "'+ searchedCities[i]+'">'+ searchedCities[i] + '</button>');
     }
  })
 
 // $('.btnPast').on(click , '.btnPast')
 $(document).on('click','.btnPast',function(e){
-    searchedCity = $(this).data('city');
+    searchedCity = $(this).data('city').toString();
+    console.log(searchedCity);
     getWeather(e);
 })
 
