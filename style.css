@@ -1,7 +1,23 @@
+@import '~mdb-ui-kit/css/mdb.min.css';
+
+nav {
+    margin-bottom: 1%;
+}
+
 nav img{
     margin-left: 5%;
 }
 
 nav span {
     font-size: 35px;
+}
+
+.btn {
+    margin-top: 20px;
+}
+
+.border {
+    padding: 10px;
+    border: solid black 10px;
+
 }
