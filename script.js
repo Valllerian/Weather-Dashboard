@@ -8,6 +8,7 @@ var userCity = $('#search-input');
 var searchButton = $('#search-button');
 var searchedCity = '';
 var pastSearches = $('#pastSearches');
+var City;
 
 var unitMeasurement = "&units=imperial";
 var lat;
@@ -19,12 +20,23 @@ var currentDate = moment().format('ll');
 
 function submitSearch(e){
     searchedCity = userCity.val(); 
-    
+
+    var searchedCities = JSON.parse(localStorage.getItem("savedCities") || "[]");
+    searchedCities.push(searchedCity);
+    localStorage.setItem("savedCities", JSON.stringify(searchedCities));
+
+    var lastCity = document.createElement("button");
+    lastCity.innerText = searchedCity;
+    lastCity.classList.add("btn");
+    lastCity.classList.add("btnPast");
+    pastSearches.append(lastCity);
+    lastCity.addEventListener("click", getWeather(lastCity)); 
 
     // console.log(searchedCity);
     getWeather(e);
 
 }
+
 
 function getWeather(e) {
 
@@ -37,12 +49,8 @@ function getWeather(e) {
       $('#uvIndex').text("");
     }
         else {
-            localStorage.setItem("city", searchedCity);
-             var lastCity = document.createElement("button");
-            lastCity.innerText = searchedCity;
-            lastCity.classList.add("btn");
-            pastSearches.append(lastCity);
             
+        
        finalUrl = starterUrl + searchedCity + apiKey + unitMeasurement;
        fetch(finalUrl)
        .then(function (response) {
@@ -122,5 +130,22 @@ function forecast(e)  {
       this.querySelector(".humid").textContent = "Humidity: " + humid + "%";
     });
   })};
+
+
+function pastClick (e){
+    searchedCity = $(this).data('city')
+    getWeather(e);
+}
+
+
+$(document).ready ( function(){
+    var searchedCities = JSON.parse(localStorage.getItem("savedCities") || "[]");
+
+    for (let i = 0; i < searchedCities.length; i++) {
+        $('#pastSearches').append('<button class ="btn btnPast" data-city = "' + searchedCities[i] + '">'+ searchedCities[i] + '</button>');
+    }
+ })
+
+$('.btnPast').click ("[data-city]", pastClick)
 
 $('#search-button').click (submitSearch);
