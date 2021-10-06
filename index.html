@@ -32,6 +32,9 @@
     Search
   </button>
   <!-- add buttons for last searches -->
+  <section>
+    <ul id="pastSearches" class="row col-md-12 mt-2"></ul>
+</section>
 </div>
 
 <!-- Main sextion with weather -->
@@ -42,6 +45,7 @@
         <!-- City name -->
       <h1  class="display-6 col">Location: <span id = "location"></span>
       </h1>
+      <hr class="my-4" />
     </div>
       <div class = "row justify-content-between">
         <!-- will generate the date here -->
@@ -51,19 +55,20 @@
         <p id="weathDesc" class="col-2 float-right">
         </p>
       </div>
-      <hr class="my-4" />
+    
       <div class="row">
         <!-- Main weather parameters for the input City  -->
       <p  class="col-3">Temperature: <span id = "temp"></span></p>
       <p  class="col-3">Wind Speed: <span id = "wind"></span></p>
       <p  class="col-3">Humidity: <span id = "humidity"></span></p>
       <p  class="col-3"> UV Index: <span id = "uvIndex"></span></p>
+      <hr class="my-4" />
     </div>
     </div>
   <div class="container row d-flex justify-content-between">
       <!-- Generating the 5-day forecast for the city -->
       <p>5-Day forecast:</p>
-    <div class="forecast card col-2">
+    <div class="forecast card col-2" id = "">
         <p >Date: <span id="dayOne"></span></p>
       <img class="icon" src="" alt="">
         <p class="temp"></p>

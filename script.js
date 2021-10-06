@@ -6,19 +6,24 @@ var finalUrl;
 
 var userCity = $('#search-input');
 var searchButton = $('#search-button');
-var searchedCity;
+var searchedCity = '';
+var pastSearches = $('#pastSearches');
 
 var unitMeasurement = "&units=imperial";
 var lat;
 var lon;
+
 
 // Setting up a curent date (format ll // Oct 5, 2021):
 var currentDate = moment().format('ll');
 
 function submitSearch(e){
     searchedCity = userCity.val(); 
+    
+
     // console.log(searchedCity);
     getWeather(e);
+
 }
 
 function getWeather(e) {
@@ -32,6 +37,12 @@ function getWeather(e) {
       $('#uvIndex').text("");
     }
         else {
+            localStorage.setItem("city", searchedCity);
+             var lastCity = document.createElement("button");
+            lastCity.innerText = searchedCity;
+            lastCity.classList.add("btn");
+            pastSearches.append(lastCity);
+            
        finalUrl = starterUrl + searchedCity + apiKey + unitMeasurement;
        fetch(finalUrl)
        .then(function (response) {
