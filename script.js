@@ -1,5 +1,7 @@
+// storing API key
 var apiKey = "&appid=86f2ecb5f73a9028974233aa68af9360";
 
+// vars to fetch weather later on
 var starterUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
 var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?q=";
 var finalUrl;
@@ -16,12 +18,14 @@ var lon;
 
 // Setting up a curent date (format ll // Oct 5, 2021):
 var currentDate = moment().format('ll');
+// Setting up date for forecast cards
 var dayOne =  moment().add(1, 'days').format('ll');
 var dayTwo =  moment().add(2, 'days').format('ll');
 var dayThree =  moment().add(3, 'days').format('ll');
 var dayFour =  moment().add(4, 'days').format('ll');
 var dayFive =  moment().add(5, 'days').format('ll');
 
+// dispplaying data lines
 $('#dayOne').text(dayTwo);
 $('#dateTwo').text(dayTwo);
 $('#dayThree').text(dayThree);
@@ -32,11 +36,15 @@ function submitSearch(e){
     searchedCity = userCity.val(); 
     var searchedCities = JSON.parse(localStorage.getItem("savedCities") || "[]");
     searchedCities.push(searchedCity);
+
+    // storing user input in Local storage
     localStorage.setItem("savedCities", JSON.stringify(searchedCities));
+    // creating buttons with user search input
     var lastCity = document.createElement("button");
     lastCity.innerText = searchedCity;
     lastCity.classList.add("btn");
     lastCity.classList.add("btnPast");
+    // appending buttons to the list
     pastSearches.append(lastCity);
     lastCity.addEventListener("click", getWeather(lastCity)); 
 
@@ -46,7 +54,7 @@ function submitSearch(e){
 }
 
 function getWeather(e) {
-
+    // If user doesnt input anything:
     if (searchedCity === ""){
       $('#location').text("Please, select a city");
       $('#cityDate').text("");
@@ -56,6 +64,7 @@ function getWeather(e) {
       $('#uvIndex').text("");
     }
         else {
+        // fetching data from Weather API with user input
        finalUrl = starterUrl + searchedCity + apiKey + unitMeasurement;
        fetch(finalUrl)
        .then(function (response) {
@@ -65,6 +74,8 @@ function getWeather(e) {
         lat = data.coord.lat;
         lon = data.coord.lon;
         console.log(data)
+
+        // Updating and displaying current weather conditions 
         $('#userInput').children('input').val('')
         $('#conditions').attr("src", "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
         $('#location').text(searchedCity);
@@ -77,6 +88,7 @@ function getWeather(e) {
         forecast(e);
     })}};
   
+        // displaying UVI index and adding colors depending on its value
 function  getUVI(e) {
         var uviIndexURL = "https://api.openweathermap.org/data/2.5/uvi/forecast?lat=" + lat + "&lon=" + lon + apiKey;
         fetch(uviIndexURL)
@@ -100,6 +112,7 @@ function  getUVI(e) {
 
 // console.log(dayFive);
 
+// fetching and displaying data for forecast cards
 function forecast(e)  {
     futureUrl = forecastUrl + searchedCity + apiKey + unitMeasurement;
        fetch(futureUrl)
@@ -120,6 +133,7 @@ function forecast(e)  {
     });
   })};
 
+  // displaying searhes on page reload
 $(document).ready ( function(){
     var searchedCities = JSON.parse(localStorage.getItem("savedCities") || "[]");
     // console.log(searchedCities);
@@ -129,10 +143,13 @@ $(document).ready ( function(){
  })
 
 // $('.btnPast').on(click , '.btnPast')
+
+// on click event for generated buttons
 $(document).on('click','.btnPast',function(e){
     searchedCity = $(this).data('city');
     console.log(searchedCity);
     getWeather(e);
 })
 
+// main on click event for weather search
 $('#search-button').click (submitSearch);
