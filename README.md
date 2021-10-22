@@ -76,4 +76,7 @@ distribute this software, either in source code form or as a compiled
 binary, for any purpose, commercial or non-commercial, and by any
 means." (Quote for source #3)
 
+
+## Collaborators:
+
 Valerii Bihun: valeriibihun.co@gmail.com
