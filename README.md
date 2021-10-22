@@ -11,6 +11,8 @@ This app runs in the browser and features dynamically updated HTML and CSS power
 - [Usage](#usage)
 - [Credits](#credits)
 - [License](#license)
+- [Collaborators](#Collaborators)
+
 
 ## Installation
 Current project has been saved in my personal GitHub repository and is currently available for cloning and reviews on:
@@ -73,3 +75,4 @@ distribute this software, either in source code form or as a compiled
 binary, for any purpose, commercial or non-commercial, and by any
 means." (Quote for source #3)
 
+Valerii Bihun: valeriibihun.co@gmail.com
