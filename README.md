@@ -14,6 +14,7 @@ This app runs in the browser and features dynamically updated HTML and CSS power
 - [Collaborators](#Collaborators)
 
 
+
 ## Installation
 Current project has been saved in my personal GitHub repository and is currently available for cloning and reviews on:
 
